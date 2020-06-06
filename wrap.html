@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <meta name="Description" content="Web Message Port Test">
+    <title>Web Message Port Test</title>
+    <style>
+        *{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body{
+            background-color: whitesmoke;
+            text-align: center;
+        }
+        iframe{
+            height:300px;
+            width:500px;
+            border:1px solid grey;
+            margin-top:24px;
+        }
+        .output{
+            font-weight: bold;
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body>
+    <h1>WRAPPER</h1>
+
+    <button onclick="connect()">click to connect</button>
+    <div class="output"></div>
+
+    <iframe id="iframe" src="https://webmessageport.now.sh/" frameborder="0"></iframe>
+
+<script>
+    var channel = new MessageChannel()
+    var output = document.querySelector('.output');
+    var iframe = document.querySelector('#iframe')
+    function connect() {
+        // Listen for messages on port1
+        if(!channel.port1.onmessage) channel.port1.onmessage = onMessage;
+        // Transfer port2 to the iframe
+        iframe.contentWindow.postMessage('Hello from the main page!', '*', [channel.port2]);
+    }
+    function onMessage(e) {
+        output.innerHTML = e.data;
+    }
+</script>
+</body>
+</html>
