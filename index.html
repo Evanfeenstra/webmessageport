@@ -9,6 +9,11 @@
 function test(){
     nativeJsPort.postMessage("hola")
 }
+function testjsinterface(){
+    if(window.JSBridge&&window.JSBridge.postMessage) {
+        window.JSBridge.postMessage("hola")
+    }
+}
 const channel = new MessageChannel()
 var nativeJsPort = channel.port2
 window.addEventListener('message', function(event) {
@@ -48,7 +53,10 @@ nativeJsPort.addEventListener('message', function(event) {
 
     <div id="div">CONNECTED!</div>
 
-    <button onclick="test()">TEST</button>
+    <div style="display:flex;justify-content:center;">
+        <button onclick="test()">TEST</button>
+        <button onclick="testjsinterface()">TEST JS INTERFACE</button>
+    </div>
 
 </body>
 </html>
