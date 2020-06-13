@@ -13,6 +13,11 @@ class JSBridge(){
 }
 
 // add these to your webview
-mWebViewComponent.settings.javaScriptEnabled = true
-mWebViewComponent.addJavascriptInterface(JSBridge(),"JSBridge")
+WebViewComponent.settings.javaScriptEnabled = true
+WebViewComponent.addJavascriptInterface(JSBridge(),"JSBridge")
+
+// to confirm
+WebViewComponent.evaluateJavascript(
+    "javascript: "+"updateFromNative(\"confirm\")",null)
+}
 ```
