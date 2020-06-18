@@ -14,6 +14,7 @@ class JSBridge(){
 
 // add these to your webview
 WebViewComponent.settings.javaScriptEnabled = true
+WebViewComponent.settings.domStorageEnabled = true
 WebViewComponent.addJavascriptInterface(JSBridge(),"JSBridge")
 
 // to confirm
